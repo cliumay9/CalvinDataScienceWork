@@ -46,14 +46,14 @@ table(iris.pred, iris.test$Species)
 # ==========================================================
 
 # Clear workspace
-rm(list = ls()) 
+# rm(list = ls()) 
 
 # Unload packages
-detach("package:datasets", unload = TRUE)
-detach("package:randomForest", unload = TRUE)
+# detach("package:datasets", unload = TRUE)
+# detach("package:randomForest", unload = TRUE)
 
 # Clear plots
-dev.off()
+# dev.off()
 
 # Clear console
-cat("\014")  # ctrl+L
+# cat("\014")  # ctrl+L
