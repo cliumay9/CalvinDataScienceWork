@@ -1,4 +1,4 @@
-# Ensembles.R - Random Forest(Ensemble)
+# Ensembling with Random Forest
 
 # ==========================================================
 # Install and load packages as needed
@@ -8,8 +8,9 @@ install.packages("randomForest")  # Install randomForest
 library(datasets)                 # Load built-in datasets 
 library(randomForest)             # Load randomForest
 
+
 # ==========================================================
-# Classification tree
+# Classification tree - Bagging with randomForest
 # ==========================================================
 
 # Use "iris" from built-in datasets
@@ -24,20 +25,26 @@ iris.split <- sample(2, nrow(iris),
 iris.train <- iris[iris.split == 1, ]
 iris.test  <- iris[iris.split == 2, ]
 
-# Compute random forest of decision trees
-set.seed(5972)                              # Random seed
-iris.rf <- randomForest(Species ~ .,        # Use all var
-                        data = iris.train,  # Data
-                        ntree = 500,        # Num trees
-                        proximity = TRUE)   # Compute prox
+# Constructing a random forest of decision trees
+#Random seed to increase consistency
+# Use all var, and use the training data defined above
+# making a random forest with 500 trees, proximity = TRUE
+set.seed(5972)                              
+iris.rf <- randomForest(Species ~ .,        
+                        data = iris.train,  
+                        ntree = 500,        
+                        proximity = TRUE) 
 
 # Check model on training set
-print(iris.rf)       # Results with classification table
-plot(iris.rf)        # Plot of error by number of trees
-importance(iris.rf)  # Table of variable importance
-varImpPlot(iris.rf)  # Plot of variable importance #See whats important indicator
+# Printing the random forest(classification table) and plotting it 
+# Table the variable importance
+# Plot variable with importance to see which one is an important indicator
+print(iris.rf)       
+plot(iris.rf)       
+importance(iris.rf) 
+varImpPlot(iris.rf)  
 
-# Use model on testing data
+# Check whether our model constructed based on training data works by using our testing data
 iris.pred <- predict(iris.rf, newdata = iris.test)
 table(iris.pred, iris.test$Species)
 
@@ -46,14 +53,14 @@ table(iris.pred, iris.test$Species)
 # ==========================================================
 
 # Clear workspace
-# rm(list = ls()) 
+#rm(list = ls()) 
 
 # Unload packages
-# detach("package:datasets", unload = TRUE)
-# detach("package:randomForest", unload = TRUE)
+#detach("package:datasets", unload = TRUE)
+#detach("package:randomForest", unload = TRUE)
 
 # Clear plots
-# dev.off()
+#dev.off()
 
 # Clear console
-# cat("\014")  # ctrl+L
+#cat("\014")  # ctrl+L
